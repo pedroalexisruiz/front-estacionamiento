@@ -1,10 +1,11 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { RegistrarEntradaComponent } from './registrar-entrada/registrar-entrada.component';
 
 
 
 @NgModule({
-  declarations: [],
+  declarations: [RegistrarEntradaComponent],
   imports: [
     CommonModule
   ]

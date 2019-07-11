@@ -23,7 +23,8 @@ export class ListaVehiculosComponent implements OnInit {
     "horaDeEntrada",
     "horaDeSalida",
     "cilindraje",
-    "totalAPagar"
+    "totalAPagar",
+    "acciones"
   ];
 
   vehiculosParqueados: IVehiculo[];
@@ -45,6 +46,19 @@ export class ListaVehiculosComponent implements OnInit {
         this.dataSource.sort = this.sort;
         this.dataSource.paginator = this.paginator;
         this.table.dataSource = this.dataSource;
+      });
+  }
+
+  registrarSalida(indicevehiculo: number): void {
+    this.servicioDeVehiculos
+      .registrarSalida(
+        this.vehiculosParqueados.find(
+          vehiculo => vehiculo.id === indicevehiculo
+        )
+      )
+      .subscribe(id => {
+        console.log(id);
+        this.cargarVehiculosParqueados();
       });
   }
 }

@@ -1,0 +1,28 @@
+<div class="col mat-elevation-z8 px-0">
+  <mat-toolbar color="primary">Registrar Entrada</mat-toolbar>
+  <form (ngSubmit)="registrarEntrada()">
+    <div class="col">
+      <mat-form-field>
+        <input matInput [(ngModel)]="vehiculo.placa" name="placa" placeholder="Placa" />
+      </mat-form-field>
+    </div>
+
+    <div class="col">
+      <mat-form-field>
+        <mat-select [(ngModel)]="vehiculo.tipoDeVehiculo" name="tipoDeVehiculo" placeholder="Tipo de Vehículo">
+          <mat-option value="CARRO">Carro</mat-option>
+          <mat-option value="MOTO">Moto</mat-option>
+        </mat-select>
+      </mat-form-field>
+    </div>
+
+    <div *ngIf="vehiculo.tipoDeVehiculo === 'MOTO'" class="col">
+      <mat-form-field>
+        <input matInput [(ngModel)]="vehiculo.cilindraje" name="cilindraje" placeholder="Cilindraje" />
+      </mat-form-field>
+    </div>
+    <div class="col text-center py-3">
+      <button type="submit" mat-raised-button color="primary">Agregar</button>
+    </div>
+  </form>
+</div>

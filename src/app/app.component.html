@@ -1,4 +1,11 @@
 <!--The content below is only a placeholder and can be replaced.-->
-<app-lista-vehiculos></app-lista-vehiculos>
-
-<router-outlet></router-outlet>
+<div class="pt-3">
+  <mat-grid-list cols="12" rowHeight="25rem">
+    <mat-grid-tile [colspan]="4">
+      <app-registrar-entrada></app-registrar-entrada>
+    </mat-grid-tile>
+    <mat-grid-tile [colspan]="8"
+      ><app-lista-vehiculos></app-lista-vehiculos
+    ></mat-grid-tile>
+  </mat-grid-list>
+</div>
