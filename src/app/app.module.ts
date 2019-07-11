@@ -1,4 +1,5 @@
 import { BrowserModule } from "@angular/platform-browser";
+import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
 import { NgModule } from "@angular/core";
 import { HttpClientModule } from "@angular/common/http";
 
@@ -8,20 +9,28 @@ import { ListaVehiculosComponent } from "./vehiculos/lista-vehiculos/lista-vehic
 import {
   MatTableModule,
   MatPaginatorModule,
-  MatSortModule
+  MatSortModule,
+  MatPaginatorIntl
 } from "@angular/material";
+import { getSpanishPaginatorIntl } from "./shared/spanish-paginator-intl";
 
 @NgModule({
   declarations: [AppComponent, ListaVehiculosComponent],
   imports: [
     BrowserModule,
+    BrowserAnimationsModule,
     AppRoutingModule,
     HttpClientModule,
     MatTableModule,
     MatPaginatorModule,
     MatSortModule
   ],
-  providers: [],
+  providers: [
+    {
+      provide: MatPaginatorIntl,
+      useValue: getSpanishPaginatorIntl()
+    }
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule {}

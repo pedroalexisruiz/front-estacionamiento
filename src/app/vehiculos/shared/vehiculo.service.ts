@@ -22,7 +22,7 @@ export class VehiculoService {
       console.error(error); // log to console instead
 
       // TODO: better job of transforming error for user consumption
-      this.log(`${operation} failed: ${error.message}`);
+      console.log(`${operation} failed: ${error.message}`);
 
       // Let the app keep running by returning an empty result.
       return of(result as T);
@@ -31,7 +31,7 @@ export class VehiculoService {
 
   listarVehiculosParqueados(): Observable<IVehiculo[]> {
     return this.http.get<IVehiculo[]>(this.vehiculoServiceUrl).pipe(
-      tap(_ => this.log("vehiculos parqueados obtenidos")),
+      tap(_ => console.log("vehiculos parqueados obtenidos")),
       catchError(this.handleError<IVehiculo[]>("listarVehiculosParqueados", []))
     );
   }
