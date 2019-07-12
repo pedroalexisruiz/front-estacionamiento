@@ -43,7 +43,7 @@ export class SeccionDeRegistro {
 
   // Obtener contenido de los elementos del DOM
 
-  async getToastMessageText(): Promise<string> {
+  async getTextoDelToast(): Promise<string> {
     return await this.getToastMessage().getText();
   }
 

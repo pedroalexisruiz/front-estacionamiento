@@ -1,87 +1,87 @@
 import { SeccionDeRegistro } from "./registroDeEntrada.po";
 
 describe("Estacionamiento registrar ", () => {
-  let registerPage: SeccionDeRegistro;
+  let seccionDeRegistro: SeccionDeRegistro;
   const placa: string = "URG-585";
   const placaMoto: string = "URG-586";
   const tipoVehiculoCarro: string = "CARRO";
   const tipoVehiculoMoto: string = "MOTO";
 
   beforeEach(async () => {
-    registerPage = new SeccionDeRegistro();
-    registerPage.navegar();
+    seccionDeRegistro = new SeccionDeRegistro();
+    seccionDeRegistro.navegar();
   });
 
   it("deberia registrar carro", async () => {
     // Arrange
-    const expectedMessage =
+    const mensajeEsperado =
       "se registro la entrada del vehiculo con placa " + placa + " de manera exitosa";
 
-    await registerPage.setValorPlaca(placa);
-    await registerPage.clickSelectTipoDeVehiculo();
-    await registerPage.setValueSelectTipoDeVehiculo(tipoVehiculoCarro);
-    await registerPage.clickBtnRegistro();
-    await registerPage.esperarHastaQueElToastEstePresente();
+    await seccionDeRegistro.setValorPlaca(placa);
+    await seccionDeRegistro.clickSelectTipoDeVehiculo();
+    await seccionDeRegistro.setValueSelectTipoDeVehiculo(tipoVehiculoCarro);
+    await seccionDeRegistro.clickBtnRegistro();
+    await seccionDeRegistro.esperarHastaQueElToastEstePresente();
 
     // Act
-    const toastContent = await registerPage.getToastMessageText();
+    const contenidoDelToast = await seccionDeRegistro.getTextoDelToast();
 
     // Assert
-    expect(toastContent.trim()).toEqual(expectedMessage);
+    expect(contenidoDelToast.trim()).toEqual(mensajeEsperado);
   });
 
   it("deberia registrar moto", async () => {
     // Arrange
-    const expectedMessage =
+    const mensajeEsperado =
       "se registro la entrada del vehiculo con placa " +
       placaMoto +
       " de manera exitosa";
 
-    await registerPage.setValorPlaca(placaMoto);
-    await registerPage.clickSelectTipoDeVehiculo();
-    await registerPage.setValueSelectTipoDeVehiculo(tipoVehiculoMoto);
-    await registerPage.esperarInputDeCilindraje();
-    await registerPage.clickBtnRegistro();
-    await registerPage.esperarHastaQueElToastEstePresente();
+    await seccionDeRegistro.setValorPlaca(placaMoto);
+    await seccionDeRegistro.clickSelectTipoDeVehiculo();
+    await seccionDeRegistro.setValueSelectTipoDeVehiculo(tipoVehiculoMoto);
+    await seccionDeRegistro.esperarInputDeCilindraje();
+    await seccionDeRegistro.clickBtnRegistro();
+    await seccionDeRegistro.esperarHastaQueElToastEstePresente();
 
     // Act
-    const toastContent = await registerPage.getToastMessageText();
+    const contenidoDelToast = await seccionDeRegistro.getTextoDelToast();
 
     // Assert
-    expect(toastContent.trim()).toEqual(expectedMessage);
+    expect(contenidoDelToast.trim()).toEqual(mensajeEsperado);
   });
 
-  it("no deberia dejar registrar", async () => {
+  it("no deberia dejar registrar porque el vehiculo ya fue ingresado", async () => {
     // Arrange
-    const expectedMessage = "El vehículo ya se encuentra en el parqueadero.";
+    const mensajeEsperado = "El vehículo ya se encuentra en el parqueadero.";
 
-    await registerPage.setValorPlaca(placa);
-    await registerPage.clickSelectTipoDeVehiculo();
-    await registerPage.setValueSelectTipoDeVehiculo(tipoVehiculoCarro);
-    await registerPage.clickBtnRegistro();
-    await registerPage.esperarHastaQueElToastEstePresente();
+    await seccionDeRegistro.setValorPlaca(placa);
+    await seccionDeRegistro.clickSelectTipoDeVehiculo();
+    await seccionDeRegistro.setValueSelectTipoDeVehiculo(tipoVehiculoCarro);
+    await seccionDeRegistro.clickBtnRegistro();
+    await seccionDeRegistro.esperarHastaQueElToastEstePresente();
 
     // Act
-    const toastContent = await registerPage.getToastMessageText();
+    const contenidoDelToast = await seccionDeRegistro.getTextoDelToast();
 
     // Assert
-    expect(toastContent.trim()).toEqual(expectedMessage);
+    expect(contenidoDelToast.trim()).toEqual(mensajeEsperado);
   });
 
   it("no deberia dejar registrar porque no digitó placa", async () => {
     // Arrange
-    const expectedMessage = "Debes ingresar la placa";
+    const mensajeEsperado = "Debes ingresar la placa";
 
-    await registerPage.setValorPlaca("");
-    await registerPage.clickSelectTipoDeVehiculo();
-    await registerPage.setValueSelectTipoDeVehiculo(tipoVehiculoCarro);
-    await registerPage.clickBtnRegistro();
-    await registerPage.esperarHastaQueElToastEstePresente();
+    await seccionDeRegistro.setValorPlaca("");
+    await seccionDeRegistro.clickSelectTipoDeVehiculo();
+    await seccionDeRegistro.setValueSelectTipoDeVehiculo(tipoVehiculoCarro);
+    await seccionDeRegistro.clickBtnRegistro();
+    await seccionDeRegistro.esperarHastaQueElToastEstePresente();
 
     // Act
-    const toastContent = await registerPage.getToastMessageText();
+    const contenidoDelToast = await seccionDeRegistro.getTextoDelToast();
 
     // Assert
-    expect(toastContent.trim()).toEqual(expectedMessage);
+    expect(contenidoDelToast.trim()).toEqual(mensajeEsperado);
   });
 });
