@@ -4,7 +4,7 @@
       <app-registrar-entrada #formRegistro (formularioVehiculoRegistrado)="registrarEntrada($event)"></app-registrar-entrada>
     </mat-grid-tile>
     <mat-grid-tile [colspan]="8"
-      ><app-lista-vehiculos #listaDeVehiculos [vehiculosParqueados]="vehiculosParqueados"></app-lista-vehiculos
+      ><app-lista-vehiculos #listaDeVehiculos (registrarSalidaDelVehiculo)="confirmarSalida($event)" [vehiculosParqueados]="vehiculosParqueados"></app-lista-vehiculos
     ></mat-grid-tile>
   </mat-grid-list>
 </div>

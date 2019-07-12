@@ -4,11 +4,13 @@ import {
   ViewChild,
   Input,
   OnChanges,
-  SimpleChanges
+  SimpleChanges,
+  Output
 } from "@angular/core";
 import { MatPaginator, MatSort, MatTable } from "@angular/material";
 import { ListaVehiculosDataSource } from "./lista-vehiculos-datasource";
 import { IVehiculo } from "../shared/vehiculo.model";
+import { EventEmitter } from "@angular/core";
 
 @Component({
   selector: "app-lista-vehiculos",
@@ -34,6 +36,7 @@ export class ListaVehiculosComponent implements OnInit, OnChanges {
   ];
 
   @Input() vehiculosParqueados: IVehiculo[];
+  @Output() registrarSalidaDelVehiculo = new EventEmitter<number>();
 
   constructor() {}
 
@@ -43,6 +46,10 @@ export class ListaVehiculosComponent implements OnInit, OnChanges {
     if ("vehiculosParqueados" in changes) {
       this.actualizarTabla();
     }
+  }
+
+  solicitarSalidaDeVehiculo(idTicket: number) {
+    this.registrarSalidaDelVehiculo.emit(idTicket);
   }
 
   actualizarTabla() {

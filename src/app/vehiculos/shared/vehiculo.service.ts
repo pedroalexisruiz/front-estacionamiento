@@ -19,28 +19,24 @@ export class VehiculoService {
   private handleError<T>(operation = "operation", result?: T) {
     return (error: any): Observable<T> => {
       console.error(error);
-      console.log(`${operation} failed: ${error.message}`);
       return of(result as T);
     };
   }
 
   listarVehiculosParqueados(): Observable<IVehiculo[]> {
     return this.http.get<IVehiculo[]>(this.vehiculoServiceUrl).pipe(
-      tap(_ => console.log("vehiculos parqueados obtenidos")),
       catchError(this.handleError<IVehiculo[]>("listarVehiculosParqueados", []))
     );
   }
 
   registrarEntrada(vehiculo: IVehiculo): Observable<any> {
     return this.http.post(this.vehiculoServiceUrl, vehiculo, httpOptions).pipe(
-      tap(_ => console.log(`Ticket creado id=${vehiculo.id}`)),
       catchError(this.handleError<any>("registrando entrada"))
     );
   }
 
   registrarSalida(vehiculo: IVehiculo): Observable<any> {
     return this.http.put(this.vehiculoServiceUrl, vehiculo, httpOptions).pipe(
-      tap(_ => console.log(`Ticket actualizado id=${vehiculo.id}`)),
       catchError(this.handleError<any>("registrando salida"))
     );
   }

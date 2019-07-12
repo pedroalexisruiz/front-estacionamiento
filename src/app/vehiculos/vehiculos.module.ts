@@ -17,21 +17,26 @@ import {
   MatSelectModule,
   MatSortModule,
   MatToolbarModule,
-  MatPaginatorIntl
+  MatPaginatorIntl,
+  MatDialogModule
 } from "@angular/material";
+
 import { getSpanishPaginatorIntl } from "app/shared/spanish-paginator-intl";
+import { ModalSalidaVehiculoComponent } from "./modal-salida-vehiculo/modal-salida-vehiculo.component";
 
 @NgModule({
   declarations: [
     RegistrarEntradaComponent,
     VehiculosComponent,
-    ListaVehiculosComponent
+    ListaVehiculosComponent,
+    ModalSalidaVehiculoComponent
   ],
   imports: [
     CommonModule,
     FormsModule,
     MatButtonModule,
     MatCardModule,
+    MatDialogModule,
     MatGridListModule,
     MatFormFieldModule,
     MatIconModule,
@@ -48,6 +53,7 @@ import { getSpanishPaginatorIntl } from "app/shared/spanish-paginator-intl";
     VehiculosComponent,
     ListaVehiculosComponent
   ],
+  entryComponents: [ModalSalidaVehiculoComponent],
   providers: [
     {
       provide: MatPaginatorIntl,
