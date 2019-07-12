@@ -64,7 +64,7 @@
       <th mat-header-cell *matHeaderCellDef mat-sort-header>
         Sacar vehículo
       </th>
-      <td (click)="solicitarSalidaDeVehiculo(row.id)" class="text-center" mat-cell *matCellDef="let row">
+      <td id="btnSacarVehiculo-row.id" (click)="solicitarSalidaDeVehiculo(row.id)" class="text-center" mat-cell *matCellDef="let row">
         <mat-icon aria-hidden="false" color="warn" aria-label="Example home icon"
           >delete</mat-icon
         >
