@@ -1,5 +1,5 @@
 import { Component, OnInit, Inject } from "@angular/core";
-import { IVehiculo } from "../shared/vehiculo.model";
+import { IVehiculo } from "../vehiculo.model";
 import { MatDialogRef, MAT_DIALOG_DATA } from "@angular/material/dialog";
 
 @Component({

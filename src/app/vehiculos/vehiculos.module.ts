@@ -22,7 +22,7 @@ import {
 } from "@angular/material";
 
 import { getSpanishPaginatorIntl } from "app/shared/spanish-paginator-intl";
-import { ModalSalidaVehiculoComponent } from "./modal-salida-vehiculo/modal-salida-vehiculo.component";
+import { ModalSalidaVehiculoComponent } from "./shared/modal-salida-vehiculo/modal-salida-vehiculo.component";
 
 @NgModule({
   declarations: [

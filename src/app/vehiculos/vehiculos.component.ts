@@ -4,7 +4,7 @@ import { VehiculoService } from "./shared/vehiculo.service";
 import { RegistrarEntradaComponent } from "./registrar-entrada/registrar-entrada.component";
 import { ListaVehiculosComponent } from "./lista-vehiculos/lista-vehiculos.component";
 import { MatDialog } from "@angular/material/dialog";
-import { ModalSalidaVehiculoComponent } from "./modal-salida-vehiculo/modal-salida-vehiculo.component";
+import { ModalSalidaVehiculoComponent } from "./shared/modal-salida-vehiculo/modal-salida-vehiculo.component";
 
 @Component({
   selector: "app-vehiculos",
