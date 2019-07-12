@@ -5,6 +5,7 @@ import { RegistrarEntradaComponent } from "./registrar-entrada/registrar-entrada
 import { ListaVehiculosComponent } from "./lista-vehiculos/lista-vehiculos.component";
 import { MatDialog } from "@angular/material/dialog";
 import { ModalSalidaVehiculoComponent } from "./shared/modal-salida-vehiculo/modal-salida-vehiculo.component";
+import { ToastrService } from "ngx-toastr";
 
 @Component({
   selector: "app-vehiculos",
@@ -22,7 +23,8 @@ export class VehiculosComponent implements OnInit, AfterViewInit {
 
   constructor(
     private servicioDeVehiculos: VehiculoService,
-    public dialog: MatDialog
+    public dialog: MatDialog,
+    private toast: ToastrService
   ) {}
 
   ngOnInit() {}
@@ -56,13 +58,24 @@ export class VehiculosComponent implements OnInit, AfterViewInit {
   }
 
   registrarEntrada(vehiculo: IVehiculo): void {
-    this.servicioDeVehiculos.registrarEntrada(vehiculo).subscribe(respuesta => {
-      vehiculo.id = respuesta.datos.id;
-      vehiculo.horaDeEntrada = respuesta.datos.horaDeEntrada;
-      this.vehiculosParqueados.push(vehiculo);
-      this.formularioDeRegistro.limpiarFormulario();
-      this.listaDeVehiculos.actualizarTabla();
-    });
+    this.servicioDeVehiculos.registrarEntrada(vehiculo).subscribe(
+      respuesta => {
+        vehiculo.id = respuesta.datos.id;
+        vehiculo.horaDeEntrada = respuesta.datos.horaDeEntrada;
+        this.vehiculosParqueados.push(vehiculo);
+        this.formularioDeRegistro.limpiarFormulario();
+        this.listaDeVehiculos.actualizarTabla();
+        this.toast.success(
+          `se registro la entrada del vehiculo con placa ${
+            vehiculo.placa
+          } de manera exitosa`,
+          "Registro de entrada"
+        );
+      },
+      err => {
+        this.toast.error(err, "Error al ingresar:");
+      }
+    );
   }
 
   confirmarSalida(idVehiculo: number): void {
@@ -74,11 +87,14 @@ export class VehiculosComponent implements OnInit, AfterViewInit {
   }
 
   registrarSalida(): void {
-    this.servicioDeVehiculos
-      .registrarSalida(this.vehiculoQueSaldra)
-      .subscribe(respuesta => {
+    this.servicioDeVehiculos.registrarSalida(this.vehiculoQueSaldra).subscribe(
+      respuesta => {
         this.vehiculoQueSaldra.horaDeSalida = respuesta.datos;
         this.cargarVehiculosParqueados();
-      });
+      },
+      err => {
+        this.toast.error(err, "Error al sacar vehículo:");
+      }
+    );
   }
 }

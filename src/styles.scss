@@ -9,6 +9,7 @@
 @import "~bootstrap/scss/grid";
 @import "~bootstrap/scss/utilities";
 @import "reset";
+@import '~ngx-toastr/toastr';
 
 .mat-grid-tile .mat-figure {
   align-items: flex-start !important;

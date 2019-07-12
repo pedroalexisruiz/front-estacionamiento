@@ -3,13 +3,24 @@
   <form (ngSubmit)="registrarEntrada()">
     <div class="col">
       <mat-form-field>
-        <input matInput [(ngModel)]="vehiculo.placa" name="placa" placeholder="Placa" />
+        <input
+          matInput
+          [(ngModel)]="vehiculo.placa"
+          id="placa"
+          name="placa"
+          placeholder="Placa"
+        />
       </mat-form-field>
     </div>
 
     <div class="col">
       <mat-form-field>
-        <mat-select [(ngModel)]="vehiculo.tipoDeVehiculo" name="tipoDeVehiculo" placeholder="Tipo de Vehículo">
+        <mat-select
+          [(ngModel)]="vehiculo.tipoDeVehiculo"
+          id="tipoDeVehiculo"
+          name="tipoDeVehiculo"
+          placeholder="Tipo de Vehículo"
+        >
           <mat-option value="CARRO">Carro</mat-option>
           <mat-option value="MOTO">Moto</mat-option>
         </mat-select>
@@ -18,11 +29,17 @@
 
     <div *ngIf="vehiculo.tipoDeVehiculo === 'MOTO'" class="col">
       <mat-form-field>
-        <input matInput [(ngModel)]="vehiculo.cilindraje" name="cilindraje" placeholder="Cilindraje" />
+        <input
+          matInput
+          [(ngModel)]="vehiculo.cilindraje"
+          id="cilindraje"
+          name="cilindraje"
+          placeholder="Cilindraje"
+        />
       </mat-form-field>
     </div>
     <div class="col text-center py-3">
-      <button type="submit" mat-raised-button color="primary">Agregar</button>
+      <button type="submit" id="btnRegistro" mat-raised-button color="primary">Agregar</button>
     </div>
   </form>
 </div>

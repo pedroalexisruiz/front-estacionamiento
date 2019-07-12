@@ -1,6 +1,6 @@
 import { Injectable } from "@angular/core";
 import { IVehiculo } from "./vehiculo.model";
-import { Observable, of } from "rxjs";
+import { Observable, of, throwError } from "rxjs";
 import { HttpClient, HttpHeaders } from "@angular/common/http";
 import { catchError, tap } from "rxjs/operators";
 
@@ -18,8 +18,7 @@ export class VehiculoService {
 
   private handleError<T>(operation = "operation", result?: T) {
     return (error: any): Observable<T> => {
-      console.error(error);
-      return of(result as T);
+      return throwError(error.error.message);
     };
   }
 
