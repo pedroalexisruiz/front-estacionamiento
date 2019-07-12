@@ -1,7 +1,13 @@
-import { AfterViewInit, Component, OnInit, ViewChild } from "@angular/core";
+import {
+  Component,
+  OnInit,
+  ViewChild,
+  Input,
+  OnChanges,
+  SimpleChanges
+} from "@angular/core";
 import { MatPaginator, MatSort, MatTable } from "@angular/material";
 import { ListaVehiculosDataSource } from "./lista-vehiculos-datasource";
-import { VehiculoService } from "../shared/vehiculo.service";
 import { IVehiculo } from "../shared/vehiculo.model";
 
 @Component({
@@ -9,7 +15,7 @@ import { IVehiculo } from "../shared/vehiculo.model";
   templateUrl: "./lista-vehiculos.component.html",
   styleUrls: ["./lista-vehiculos.component.scss"]
 })
-export class ListaVehiculosComponent implements OnInit {
+export class ListaVehiculosComponent implements OnInit, OnChanges {
   @ViewChild(MatPaginator, { static: false }) paginator: MatPaginator;
   @ViewChild(MatSort, { static: false }) sort: MatSort;
   @ViewChild(MatTable, { static: false }) table: MatTable<IVehiculo>;
@@ -27,38 +33,24 @@ export class ListaVehiculosComponent implements OnInit {
     "acciones"
   ];
 
-  vehiculosParqueados: IVehiculo[];
+  @Input() vehiculosParqueados: IVehiculo[];
 
-  constructor(private servicioDeVehiculos: VehiculoService) {}
+  constructor() {}
 
-  ngOnInit() {
-    this.cargarVehiculosParqueados();
+  ngOnInit() {}
+
+  ngOnChanges(changes: SimpleChanges) {
+    if ("vehiculosParqueados" in changes) {
+      this.actualizarTabla();
+    }
   }
 
-  cargarVehiculosParqueados(): void {
-    this.servicioDeVehiculos
-      .listarVehiculosParqueados()
-      .subscribe(vehiculos => {
-        this.vehiculosParqueados = vehiculos;
-        this.dataSource = new ListaVehiculosDataSource(
-          this.vehiculosParqueados
-        );
-        this.dataSource.sort = this.sort;
-        this.dataSource.paginator = this.paginator;
-        this.table.dataSource = this.dataSource;
-      });
-  }
-
-  registrarSalida(indicevehiculo: number): void {
-    this.servicioDeVehiculos
-      .registrarSalida(
-        this.vehiculosParqueados.find(
-          vehiculo => vehiculo.id === indicevehiculo
-        )
-      )
-      .subscribe(id => {
-        console.log(id);
-        this.cargarVehiculosParqueados();
-      });
+  actualizarTabla() {
+    this.dataSource = new ListaVehiculosDataSource(this.vehiculosParqueados);
+    this.dataSource.sort = this.sort;
+    this.dataSource.paginator = this.paginator;
+    if (this.table) {
+      this.table.dataSource = this.dataSource;
+    }
   }
 }

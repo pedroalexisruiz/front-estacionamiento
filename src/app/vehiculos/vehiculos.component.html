@@ -1,0 +1,10 @@
+<div class="pt-3">
+  <mat-grid-list cols="12" rowHeight="25rem">
+    <mat-grid-tile [colspan]="4">
+      <app-registrar-entrada #formRegistro (formularioVehiculoRegistrado)="registrarEntrada($event)"></app-registrar-entrada>
+    </mat-grid-tile>
+    <mat-grid-tile [colspan]="8"
+      ><app-lista-vehiculos #listaDeVehiculos [vehiculosParqueados]="vehiculosParqueados"></app-lista-vehiculos
+    ></mat-grid-tile>
+  </mat-grid-list>
+</div>

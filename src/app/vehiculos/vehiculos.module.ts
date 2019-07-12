@@ -1,13 +1,58 @@
-import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
-import { RegistrarEntradaComponent } from './registrar-entrada/registrar-entrada.component';
-
-
+import { NgModule } from "@angular/core";
+import { CommonModule } from "@angular/common";
+import { RegistrarEntradaComponent } from "./registrar-entrada/registrar-entrada.component";
+import { VehiculosComponent } from "./vehiculos.component";
+import { ListaVehiculosComponent } from "./lista-vehiculos/lista-vehiculos.component";
+import { FormsModule } from "@angular/forms";
+import {
+  MatTableModule,
+  MatButtonModule,
+  MatGridListModule,
+  MatCardModule,
+  MatFormFieldModule,
+  MatIconModule,
+  MatInputModule,
+  MatOptionModule,
+  MatPaginatorModule,
+  MatSelectModule,
+  MatSortModule,
+  MatToolbarModule,
+  MatPaginatorIntl
+} from "@angular/material";
+import { getSpanishPaginatorIntl } from "app/shared/spanish-paginator-intl";
 
 @NgModule({
-  declarations: [RegistrarEntradaComponent],
+  declarations: [
+    RegistrarEntradaComponent,
+    VehiculosComponent,
+    ListaVehiculosComponent
+  ],
   imports: [
-    CommonModule
+    CommonModule,
+    FormsModule,
+    MatButtonModule,
+    MatCardModule,
+    MatGridListModule,
+    MatFormFieldModule,
+    MatIconModule,
+    MatInputModule,
+    MatOptionModule,
+    MatSelectModule,
+    MatTableModule,
+    MatToolbarModule,
+    MatPaginatorModule,
+    MatSortModule
+  ],
+  exports: [
+    RegistrarEntradaComponent,
+    VehiculosComponent,
+    ListaVehiculosComponent
+  ],
+  providers: [
+    {
+      provide: MatPaginatorIntl,
+      useValue: getSpanishPaginatorIntl()
+    }
   ]
 })
-export class VehiculosModule { }
+export class VehiculosModule {}

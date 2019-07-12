@@ -1,6 +1,6 @@
-import { Component, OnInit } from "@angular/core";
-import { VehiculoService } from "../shared/vehiculo.service";
+import { Component, OnInit, Output, ViewChild } from "@angular/core";
 import { IVehiculo } from "../shared/vehiculo.model";
+import { EventEmitter } from "@angular/core";
 
 @Component({
   selector: "app-registrar-entrada",
@@ -14,14 +14,15 @@ export class RegistrarEntradaComponent implements OnInit {
     tipoDeVehiculo: "",
     cilindraje: 0
   };
-  constructor(private servicioDeVehiculos: VehiculoService) {}
+
+  @Output() formularioVehiculoRegistrado = new EventEmitter<IVehiculo>();
+
+  constructor() {}
 
   ngOnInit() {}
 
   registrarEntrada(): void {
-    this.servicioDeVehiculos.registrarEntrada(this.vehiculo).subscribe(id => {
-      this.vehiculo.id = id;
-    });
+    this.formularioVehiculoRegistrado.emit(this.vehiculo);
   }
 
   limpiarFormulario(): void {
