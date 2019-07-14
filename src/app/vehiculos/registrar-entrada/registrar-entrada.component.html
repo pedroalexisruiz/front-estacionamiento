@@ -1,45 +1,45 @@
 <div class="col mat-elevation-z8 px-0">
-  <mat-toolbar color="primary">Registrar Entrada</mat-toolbar>
+  <div class="card-panel mt-0 teal lighten-2 text-center">
+    <h5 class="text-white">Registrar Entrada</h5>
+  </div>
   <form (ngSubmit)="registrarEntrada()">
-    <div class="col">
-      <mat-form-field>
-        <input
-          matInput
-          [(ngModel)]="vehiculo.placa"
-          id="placa"
-          name="placa"
-          placeholder="Placa"
-        />
-      </mat-form-field>
+    <div class="input-field col s12">
+      <input
+        [(ngModel)]="vehiculo.placa"
+        id="placa"
+        name="placa"
+        type="text"
+        class="validate"
+      />
+      <label for="placa">Placa</label>
     </div>
 
-    <div class="col">
-      <mat-form-field>
-        <mat-select
-          [(ngModel)]="vehiculo.tipoDeVehiculo"
-          id="tipoDeVehiculo"
-          name="tipoDeVehiculo"
-          placeholder="Tipo de Vehículo"
-        >
-          <mat-option value="CARRO">Carro</mat-option>
-          <mat-option value="MOTO">Moto</mat-option>
-        </mat-select>
-      </mat-form-field>
-    </div>
+    <mat-form-field class="col s12">
+      <mat-select
+        [(ngModel)]="vehiculo.tipoDeVehiculo"
+        id="tipoDeVehiculo"
+        name="tipoDeVehiculo"
+        placeholder="Tipo de Vehículo"
+      >
+        <mat-option value="CARRO">Carro</mat-option>
+        <mat-option value="MOTO">Moto</mat-option>
+      </mat-select>
+    </mat-form-field>
 
-    <div *ngIf="vehiculo.tipoDeVehiculo === 'MOTO'" class="col">
-      <mat-form-field>
-        <input
-          matInput
-          [(ngModel)]="vehiculo.cilindraje"
-          id="cilindraje"
-          name="cilindraje"
-          placeholder="Cilindraje"
-        />
-      </mat-form-field>
+    <div *ngIf="vehiculo.tipoDeVehiculo === 'MOTO'" class="input-field col s12">
+      <input
+        [(ngModel)]="vehiculo.cilindraje"
+        id="cilindraje"
+        name="cilindraje"
+        type="number"
+        class="validate"
+      />
+      <label for="cilindraje">Cilindraje</label>
     </div>
     <div class="col text-center py-3">
-      <button type="submit" id="btnRegistro" mat-raised-button color="primary">Agregar</button>
+      <button type="submit" id="btnRegistro" class="waves-effect waves-light btn">
+        Agregar
+      </button>
     </div>
   </form>
 </div>

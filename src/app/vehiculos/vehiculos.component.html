@@ -1,10 +1,17 @@
-<div class="pt-3">
-  <mat-grid-list cols="12" rowHeight="25rem">
-    <mat-grid-tile [colspan]="4">
-      <app-registrar-entrada #formRegistro (formularioVehiculoRegistrado)="registrarEntrada($event)"></app-registrar-entrada>
-    </mat-grid-tile>
-    <mat-grid-tile [colspan]="8"
-      ><app-lista-vehiculos #listaDeVehiculos (registrarSalidaDelVehiculo)="confirmarSalida($event)" [vehiculosParqueados]="vehiculosParqueados"></app-lista-vehiculos
-    ></mat-grid-tile>
-  </mat-grid-list>
+<div class="container">
+    <div class="pt-3 row">
+        <div class="col col-md-3">
+          <app-registrar-entrada
+            #formRegistro
+            (formularioVehiculoRegistrado)="registrarEntrada($event)"
+          ></app-registrar-entrada>
+        </div>
+        <div class="col col-md-9 pt-3 pt-sm-0">
+          <app-lista-vehiculos
+            #listaDeVehiculos
+            (registrarSalidaDelVehiculo)="confirmarSalida($event)"
+            [vehiculosParqueados]="vehiculosParqueados"
+          ></app-lista-vehiculos>
+        </div>
+      </div>
 </div>

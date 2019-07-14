@@ -16,8 +16,6 @@ export class VehiculosComponent implements OnInit, AfterViewInit {
   @ViewChild("formRegistro", { static: false })
   formularioDeRegistro: RegistrarEntradaComponent;
 
-  @ViewChild("listaDeVehiculos", { static: false })
-  listaDeVehiculos: ListaVehiculosComponent;
   vehiculosParqueados: IVehiculo[] = [];
   vehiculoQueSaldra: IVehiculo | null;
 
@@ -53,18 +51,15 @@ export class VehiculosComponent implements OnInit, AfterViewInit {
       .listarVehiculosParqueados()
       .subscribe(vehiculos => {
         this.vehiculosParqueados = vehiculos;
-        this.listaDeVehiculos.actualizarTabla();
       });
   }
 
   registrarEntrada(vehiculo: IVehiculo): void {
     this.servicioDeVehiculos.registrarEntrada(vehiculo).subscribe(
       respuesta => {
-        vehiculo.id = respuesta.datos.id;
-        vehiculo.horaDeEntrada = respuesta.datos.horaDeEntrada;
+        vehiculo.horaDeEntrada = respuesta.datos;
         this.vehiculosParqueados.push(vehiculo);
         this.formularioDeRegistro.limpiarFormulario();
-        this.listaDeVehiculos.actualizarTabla();
         this.toast.success(
           `se registro la entrada del vehiculo con placa ${
             vehiculo.placa
@@ -78,9 +73,9 @@ export class VehiculosComponent implements OnInit, AfterViewInit {
     );
   }
 
-  confirmarSalida(idVehiculo: number): void {
+  confirmarSalida(placa: string): void {
     this.vehiculoQueSaldra = this.vehiculosParqueados.find(
-      vehiculo => vehiculo.id === idVehiculo
+      vehiculo => vehiculo.placa === placa
     );
 
     this.openDialog();

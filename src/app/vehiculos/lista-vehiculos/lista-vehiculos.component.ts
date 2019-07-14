@@ -17,22 +17,14 @@ import { EventEmitter } from "@angular/core";
   templateUrl: "./lista-vehiculos.component.html",
   styleUrls: ["./lista-vehiculos.component.scss"]
 })
-export class ListaVehiculosComponent implements OnInit, OnChanges {
-  @ViewChild(MatPaginator, { static: false }) paginator: MatPaginator;
-  @ViewChild(MatSort, { static: false }) sort: MatSort;
-  @ViewChild(MatTable, { static: false }) table: MatTable<IVehiculo>;
-  dataSource: ListaVehiculosDataSource;
+export class ListaVehiculosComponent implements OnInit {
 
   /** Columns displayed in the table. Columns IDs can be added, removed, or reordered. */
   displayedColumns = [
-    "id",
-    "placa",
-    "tipoDeVehiculo",
-    "horaDeEntrada",
-    "horaDeSalida",
-    "cilindraje",
-    "totalAPagar",
-    "acciones"
+    "Placa",
+    "Tipo De Vehiculo",
+    "Hora De Entrada",
+    ""
   ];
 
   @Input() vehiculosParqueados: IVehiculo[];
@@ -42,22 +34,7 @@ export class ListaVehiculosComponent implements OnInit, OnChanges {
 
   ngOnInit() {}
 
-  ngOnChanges(changes: SimpleChanges) {
-    if ("vehiculosParqueados" in changes) {
-      this.actualizarTabla();
-    }
-  }
-
   solicitarSalidaDeVehiculo(idTicket: number) {
     this.registrarSalidaDelVehiculo.emit(idTicket);
-  }
-
-  actualizarTabla() {
-    this.dataSource = new ListaVehiculosDataSource(this.vehiculosParqueados);
-    this.dataSource.sort = this.sort;
-    this.dataSource.paginator = this.paginator;
-    if (this.table) {
-      this.table.dataSource = this.dataSource;
-    }
   }
 }

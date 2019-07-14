@@ -11,6 +11,8 @@
 @import "reset";
 @import '~ngx-toastr/toastr';
 
+@import "../src/assets/materialize/css/materialize.css";
+
 .mat-grid-tile .mat-figure {
   align-items: flex-start !important;
 }

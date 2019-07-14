@@ -1,86 +1,31 @@
 <div class="col mat-elevation-z8 px-0">
-  <mat-toolbar color="primary">Vehiculos parqueados</mat-toolbar>
+  <div class="card-panel mt-0 teal lighten-2"><h5 class="text-white">Vehiculos parqueados</h5></div>
+  <div class="col">
+    <table class="responsive-table striped">
+      <thead>
+        <tr>
+          <th class="text-center" *ngFor="let head of displayedColumns">{{ head }}</th>
+        </tr>
+      </thead>
 
-  <table mat-table class="full-width-table" matSort aria-label="Elements">
-    <!-- Id Column -->
-    <ng-container matColumnDef="id">
-      <th mat-header-cell *matHeaderCellDef mat-sort-header>Id</th>
-      <td mat-cell *matCellDef="let row">{{ row.id }}</td>
-    </ng-container>
-
-    <!-- Name Column -->
-    <ng-container matColumnDef="placa">
-      <th mat-header-cell *matHeaderCellDef mat-sort-header>Placa</th>
-      <td mat-cell *matCellDef="let row">{{ row.placa }}</td>
-    </ng-container>
-
-    <!-- Name Column -->
-    <ng-container matColumnDef="cilindraje">
-      <th mat-header-cell *matHeaderCellDef mat-sort-header>Cilindraje</th>
-      <td mat-cell *matCellDef="let row">{{ row.cilindraje }}</td>
-    </ng-container>
-
-    <!-- Name Column -->
-    <ng-container matColumnDef="tipoDeVehiculo">
-      <th mat-header-cell *matHeaderCellDef mat-sort-header>
-        Tipo de Vehiculo
-      </th>
-      <td mat-cell *matCellDef="let row">
-        {{ row.tipoDeVehiculo | titlecase }}
-      </td>
-    </ng-container>
-
-    <!-- Name Column -->
-    <ng-container matColumnDef="horaDeEntrada">
-      <th mat-header-cell *matHeaderCellDef mat-sort-header>
-        Hora de Entrada
-      </th>
-      <td mat-cell *matCellDef="let row">
-        {{ row.horaDeEntrada | date: "medium" }}
-      </td>
-    </ng-container>
-
-    <!-- Name Column -->
-    <ng-container matColumnDef="horaDeSalida">
-      <th mat-header-cell *matHeaderCellDef mat-sort-header>
-        Hora de Salida
-      </th>
-      <td mat-cell *matCellDef="let row">
-        {{ row.horaDeSalida | date: "medium" }}
-      </td>
-    </ng-container>
-
-    <!-- Name Column -->
-    <ng-container matColumnDef="totalAPagar">
-      <th mat-header-cell *matHeaderCellDef mat-sort-header>
-        Total a pagar
-      </th>
-      <td mat-cell *matCellDef="let row">
-        {{ row.totalAPagar | currency: "COP":"symbol-narrow" }}
-      </td>
-    </ng-container>
-
-    <ng-container matColumnDef="acciones">
-      <th mat-header-cell *matHeaderCellDef mat-sort-header>
-        Sacar vehículo
-      </th>
-      <td id="btnSacarVehiculo-row.id" (click)="solicitarSalidaDeVehiculo(row.id)" class="text-center" mat-cell *matCellDef="let row">
-        <mat-icon aria-hidden="false" color="warn" aria-label="Example home icon"
-          >delete</mat-icon
-        >
-      </td>
-    </ng-container>
-
-    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-    <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
-  </table>
-
-  <mat-paginator
-    #paginator
-    [length]="dataSource?.data.length"
-    [pageIndex]="0"
-    [pageSize]="10"
-    [pageSizeOptions]="[10, 20, 50, 100]"
-  >
-  </mat-paginator>
+      <tbody>
+        <tr *ngFor="let vehiculo of vehiculosParqueados">
+          <td class="text-center">{{ vehiculo.placa }}</td>
+          <td class="text-center">{{ vehiculo.tipoDeVehiculo | titlecase }}</td>
+          <td>{{ vehiculo.horaDeEntrada | date: "medium" }}</td>
+          <td
+            id="btnSacarVehiculo-vehiculo.placa"
+            (click)="solicitarSalidaDeVehiculo(vehiculo.placa)"
+            class="text-center"
+          >
+            <a
+              href="javascript:void(0)"
+              class="btn-floating waves-effect waves-light btn-small"
+              ><i class="material-icons left">check</i></a
+            >
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
 </div>

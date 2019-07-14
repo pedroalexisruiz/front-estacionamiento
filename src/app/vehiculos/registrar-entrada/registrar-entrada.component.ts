@@ -11,8 +11,7 @@ export class RegistrarEntradaComponent implements OnInit {
   vehiculo: IVehiculo = {
     id: 0,
     placa: "",
-    tipoDeVehiculo: "",
-    cilindraje: 0
+    tipoDeVehiculo: ""
   };
 
   @Output() formularioVehiculoRegistrado = new EventEmitter<IVehiculo>();
