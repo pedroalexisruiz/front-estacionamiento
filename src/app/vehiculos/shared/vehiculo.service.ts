@@ -23,20 +23,24 @@ export class VehiculoService {
   }
 
   listarVehiculosParqueados(): Observable<IVehiculo[]> {
-    return this.http.get<IVehiculo[]>(this.vehiculoServiceUrl).pipe(
-      catchError(this.handleError<IVehiculo[]>("listarVehiculosParqueados", []))
-    );
+    return this.http
+      .get<IVehiculo[]>(this.vehiculoServiceUrl)
+      .pipe(
+        catchError(
+          this.handleError<IVehiculo[]>("listarVehiculosParqueados", [])
+        )
+      );
   }
 
   registrarEntrada(vehiculo: IVehiculo): Observable<any> {
-    return this.http.post(this.vehiculoServiceUrl, vehiculo, httpOptions).pipe(
-      catchError(this.handleError<any>("registrando entrada"))
-    );
+    return this.http
+      .post(this.vehiculoServiceUrl, vehiculo, httpOptions)
+      .pipe(catchError(this.handleError<any>("registrando entrada")));
   }
 
-  registrarSalida(vehiculo: IVehiculo): Observable<any> {
-    return this.http.put(this.vehiculoServiceUrl, vehiculo, httpOptions).pipe(
-      catchError(this.handleError<any>("registrando salida"))
-    );
+  registrarSalida(placa: string): Observable<any> {
+    return this.http
+      .put(`${this.vehiculoServiceUrl}/${placa}`, httpOptions)
+      .pipe(catchError(this.handleError<any>("registrando salida")));
   }
 }

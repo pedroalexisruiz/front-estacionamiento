@@ -2,7 +2,6 @@ import { Component, OnInit, ViewChild, AfterViewInit } from "@angular/core";
 import { IVehiculo } from "./shared/vehiculo.model";
 import { VehiculoService } from "./shared/vehiculo.service";
 import { RegistrarEntradaComponent } from "./registrar-entrada/registrar-entrada.component";
-import { ListaVehiculosComponent } from "./lista-vehiculos/lista-vehiculos.component";
 import { MatDialog } from "@angular/material/dialog";
 import { ModalSalidaVehiculoComponent } from "./shared/modal-salida-vehiculo/modal-salida-vehiculo.component";
 import { ToastrService } from "ngx-toastr";
@@ -82,7 +81,7 @@ export class VehiculosComponent implements OnInit, AfterViewInit {
   }
 
   registrarSalida(): void {
-    this.servicioDeVehiculos.registrarSalida(this.vehiculoQueSaldra).subscribe(
+    this.servicioDeVehiculos.registrarSalida(this.vehiculoQueSaldra.placa).subscribe(
       respuesta => {
         this.vehiculoQueSaldra.horaDeSalida = respuesta.datos;
         this.cargarVehiculosParqueados();
