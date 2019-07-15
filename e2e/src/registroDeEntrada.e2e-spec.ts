@@ -2,10 +2,11 @@ import { SeccionDeRegistro } from "./registroDeEntrada.po";
 
 describe("Estacionamiento registrar ", () => {
   let seccionDeRegistro: SeccionDeRegistro;
-  const placa: string = "URG-585";
-  const placaMoto: string = "URG-586";
+  const placa: string = "PED124";
+  const placaMoto: string = "PED123";
   const tipoVehiculoCarro: string = "CARRO";
   const tipoVehiculoMoto: string = "MOTO";
+  const cilindraje: string = "150";
 
   beforeEach(async () => {
     seccionDeRegistro = new SeccionDeRegistro();
@@ -15,7 +16,9 @@ describe("Estacionamiento registrar ", () => {
   it("deberia registrar carro", async () => {
     // Arrange
     const mensajeEsperado =
-      "se registro la entrada del vehiculo con placa " + placa + " de manera exitosa";
+      "se registro la entrada del vehiculo con placa " +
+      placa +
+      " de manera exitosa";
 
     await seccionDeRegistro.setValorPlaca(placa);
     await seccionDeRegistro.clickSelectTipoDeVehiculo();
@@ -41,6 +44,7 @@ describe("Estacionamiento registrar ", () => {
     await seccionDeRegistro.clickSelectTipoDeVehiculo();
     await seccionDeRegistro.setValueSelectTipoDeVehiculo(tipoVehiculoMoto);
     await seccionDeRegistro.esperarInputDeCilindraje();
+    await seccionDeRegistro.setValorCilindraje(cilindraje);
     await seccionDeRegistro.clickBtnRegistro();
     await seccionDeRegistro.esperarHastaQueElToastEstePresente();
 
