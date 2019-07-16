@@ -12,10 +12,7 @@ describe("Estacionamiento registrar ", () => {
 
   it("deberia sacar el vehiculo", async () => {
     // Arrange
-    const mensajeEsperado =
-      "El vehiculo con placa " +
-      placa +
-      " fue retirado";
+    const mensajeEsperado = "Cobrar: $1,000";
 
     await seccionDeRegistro.setValorPlaca(placa);
     await seccionDeRegistro.clickSelectTipoDeVehiculo();
@@ -27,9 +24,9 @@ describe("Estacionamiento registrar ", () => {
     await seccionDeRegistro.clickBtnSacarVehiculo(placa);
     await seccionDeRegistro.esperarBotonConfirmarSalida();
     await seccionDeRegistro.clickBtnConfirmarSalida();
-    await seccionDeRegistro.esperarHastaQueElToastEstePresente();
+    await seccionDeRegistro.esperarTotalAPagar();
     // Act
-    const contenidoDelToast = await seccionDeRegistro.getTextoDelToast();
+    const contenidoDelToast = await seccionDeRegistro.getTextoTotalAPagar();
 
     // Assert
     expect(contenidoDelToast.trim()).toEqual(mensajeEsperado);

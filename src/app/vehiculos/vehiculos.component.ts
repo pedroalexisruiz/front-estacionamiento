@@ -5,6 +5,7 @@ import { RegistrarEntradaComponent } from "./registrar-entrada/registrar-entrada
 import { MatDialog } from "@angular/material/dialog";
 import { ModalSalidaVehiculoComponent } from "./shared/modal-salida-vehiculo/modal-salida-vehiculo.component";
 import { ToastrService } from "ngx-toastr";
+import { ModalCobroComponent } from "./shared/modal-cobro/modal-cobro.component";
 
 @Component({
   selector: "app-vehiculos",
@@ -31,7 +32,7 @@ export class VehiculosComponent implements OnInit {
 
   openDialog(): void {
     const dialogRef = this.dialog.open(ModalSalidaVehiculoComponent, {
-      width: "40%",
+      width: "60%",
       data: this.servicioDeVehiculos.vehiculoQueSaldra
     });
 
@@ -41,6 +42,16 @@ export class VehiculosComponent implements OnInit {
       } else {
         this.servicioDeVehiculos.vehiculoQueSaldra = null;
       }
+    });
+  }
+
+  mostrarResumen(): void {
+    const dialogRef = this.dialog.open(ModalCobroComponent, {
+      width: "60%",
+      data: this.servicioDeVehiculos.vehiculoQueSaldra
+    });
+    dialogRef.afterClosed().subscribe(vehiculo => {
+      this.servicioDeVehiculos.vehiculoQueSaldra = null;
     });
   }
 
@@ -69,12 +80,7 @@ export class VehiculosComponent implements OnInit {
   registrarSalida(): void {
     this.servicioDeVehiculos.registrarSalida().subscribe(
       respuesta => {
-        this.toast.success(
-          `El vehiculo con placa ${
-            this.servicioDeVehiculos.vehiculoQueSaldra.placa
-          } fue retirado`,
-          "Registro de salida"
-        );
+        this.mostrarResumen();
       },
       err => {
         this.toast.error(err, "Error al sacar vehículo:");

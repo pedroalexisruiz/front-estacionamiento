@@ -1,13 +1,15 @@
-<h1 mat-dialog-title>Registrar salida de vehículo</h1>
+<h1 mat-dialog-title>Confirmar salida</h1>
 <div mat-dialog-content>
-  <p>
-    Por favor confirma la salida:
-    {{ data.tipoDeVehiculo }} con placa {{ data.placa }}
-  </p>
+  <p>{{ data.tipoDeVehiculo | titlecase }} con placa {{ data.placa }}</p>
 </div>
-<div mat-dialog-actions>
-  <button mat-button mat-dialog-close cdkFocusInitial>No, gracias</button>
-  <button id="btnConfirmarSalida" mat-button [mat-dialog-close]="data" cdkFocusInitial>
-    Sí, confirmar
+<div mat-dialog-actions align="center">
+  <button
+    class="waves-effect waves-light btn btn-small"
+    id="btnConfirmarSalida"
+    [mat-dialog-close]="data"
+    cdkFocusInitial
+  >
+    Confirmar
   </button>
+  <button mat-button mat-dialog-close cdkFocusInitial>No, gracias</button>
 </div>

@@ -61,7 +61,8 @@ export class VehiculoService {
       .pipe(
         catchError(this.handleError<any>("registrando salida")),
         map(respuesta => {
-          this.vehiculoQueSaldra.horaDeSalida = respuesta.datos;
+          this.vehiculoQueSaldra.horaDeSalida = respuesta.datos.horaDeSalida;
+          this.vehiculoQueSaldra.totalAPagar = respuesta.datos.totalAPagar;
           this.listarVehiculosParqueados();
         })
       );

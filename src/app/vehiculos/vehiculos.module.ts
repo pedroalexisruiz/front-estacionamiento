@@ -23,13 +23,15 @@ import {
 
 import { getSpanishPaginatorIntl } from "app/shared/spanish-paginator-intl";
 import { ModalSalidaVehiculoComponent } from "./shared/modal-salida-vehiculo/modal-salida-vehiculo.component";
+import { ModalCobroComponent } from './shared/modal-cobro/modal-cobro.component';
 
 @NgModule({
   declarations: [
     RegistrarEntradaComponent,
     VehiculosComponent,
     ListaVehiculosComponent,
-    ModalSalidaVehiculoComponent
+    ModalSalidaVehiculoComponent,
+    ModalCobroComponent
   ],
   imports: [
     CommonModule,
@@ -53,7 +55,7 @@ import { ModalSalidaVehiculoComponent } from "./shared/modal-salida-vehiculo/mod
     VehiculosComponent,
     ListaVehiculosComponent
   ],
-  entryComponents: [ModalSalidaVehiculoComponent],
+  entryComponents: [ModalSalidaVehiculoComponent, ModalCobroComponent],
   providers: [
     {
       provide: MatPaginatorIntl,

@@ -49,10 +49,18 @@ export class SeccionDeSalida {
     return $("#btnSacarVehiculo-" + placa);
   }
 
+  getH6TotalAPagar(): ElementFinder {
+    return $("#textoCobro");
+  }
+
   // Obtener contenido de los elementos del DOM
 
   async getTextoDelToast(): Promise<string> {
     return await this.getToastMessage().getText();
+  }
+
+  async getTextoTotalAPagar(): Promise<string> {
+    return await this.getH6TotalAPagar().getText();
   }
 
   // Modificar elementos del DOM
@@ -104,6 +112,10 @@ export class SeccionDeSalida {
     return await this.esperarHastaQueEstePresente(
       this.getBtnSacarVehiculo(placa)
     );
+  }
+
+  async esperarTotalAPagar(): Promise<void> {
+    return await this.esperarHastaQueEstePresente(this.getH6TotalAPagar());
   }
 
   async esperarBotonConfirmarSalida(): Promise<void> {

@@ -1,0 +1,18 @@
+<h1 mat-dialog-title>Resumen</h1>
+<div id="modalDeCobro" mat-dialog-content>
+  <p>
+    <span>{{ data.tipoDeVehiculo | titlecase }}</span>
+    con placa {{ data.placa }}
+  </p>
+  <p><span>Hora de entrada:</span>{{ data.horaDeEntrada | date: "medium" }}</p>
+  <p><span>Hora de salida:</span>{{ data.horaDeSalida | date: "medium" }}</p>
+  <h6 id="textoCobro">
+    Cobrar:
+    {{ data.totalAPagar | currency: "COP":"symbol-narrow" }}
+  </h6>
+</div>
+<div mat-dialog-actions align="center">
+  <button class="center-align waves-effect waves-light btn" mat-dialog-close cdkFocusInitial>
+    Aceptar
+  </button>
+</div>
