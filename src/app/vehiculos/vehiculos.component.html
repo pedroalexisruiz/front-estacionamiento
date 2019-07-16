@@ -10,7 +10,7 @@
           <app-lista-vehiculos
             #listaDeVehiculos
             (registrarSalidaDelVehiculo)="confirmarSalida($event)"
-            [vehiculosParqueados]="vehiculosParqueados"
+            [vehiculosParqueados]="servicioDeVehiculos.vehiculosParqueados"
           ></app-lista-vehiculos>
         </div>
       </div>

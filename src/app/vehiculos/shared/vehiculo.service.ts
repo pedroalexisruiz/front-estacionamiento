@@ -1,18 +1,22 @@
 import { Injectable } from "@angular/core";
 import { IVehiculo } from "./vehiculo.model";
-import { Observable, of, throwError } from "rxjs";
+import { Observable, throwError } from "rxjs";
 import { HttpClient, HttpHeaders } from "@angular/common/http";
-import { catchError, tap } from "rxjs/operators";
+import { catchError, map } from "rxjs/operators";
+import { environment } from "@environment/environment";
 
 const httpOptions = {
   headers: new HttpHeaders({ "Content-Type": "application/json" })
 };
 
+const urlServicio = environment.urlTickets
+
 @Injectable({
   providedIn: "root"
 })
 export class VehiculoService {
-  private vehiculoServiceUrl = "http://localhost:8080/tickets";
+  vehiculosParqueados: IVehiculo[] = [];
+  vehiculoQueSaldra: IVehiculo | null;
 
   constructor(private http: HttpClient) {}
 
@@ -22,25 +26,44 @@ export class VehiculoService {
     };
   }
 
-  listarVehiculosParqueados(): Observable<IVehiculo[]> {
-    return this.http
-      .get<IVehiculo[]>(this.vehiculoServiceUrl)
+  listarVehiculosParqueados() {
+    this.http
+      .get<IVehiculo[]>(urlServicio)
       .pipe(
         catchError(
           this.handleError<IVehiculo[]>("listarVehiculosParqueados", [])
         )
-      );
+      )
+      .subscribe(vehiculos => {
+        this.vehiculosParqueados = vehiculos;
+      });
   }
 
   registrarEntrada(vehiculo: IVehiculo): Observable<any> {
-    return this.http
-      .post(this.vehiculoServiceUrl, vehiculo, httpOptions)
-      .pipe(catchError(this.handleError<any>("registrando entrada")));
+    return this.http.post(urlServicio, vehiculo, httpOptions).pipe(
+      catchError(this.handleError<any>("registrando salida")),
+      map((respuesta: any) => {
+        vehiculo.horaDeEntrada = respuesta.datos;
+        this.vehiculosParqueados.push(vehiculo);
+      })
+    );
   }
 
-  registrarSalida(placa: string): Observable<any> {
+  confirmarSalida(placa: string): void {
+    this.vehiculoQueSaldra = this.vehiculosParqueados.find(
+      vehiculo => vehiculo.placa === placa
+    );
+  }
+
+  registrarSalida(): Observable<any> {
     return this.http
-      .put(`${this.vehiculoServiceUrl}/${placa}`, httpOptions)
-      .pipe(catchError(this.handleError<any>("registrando salida")));
+      .put(`${urlServicio}/${this.vehiculoQueSaldra.placa}`, httpOptions)
+      .pipe(
+        catchError(this.handleError<any>("registrando salida")),
+        map(respuesta => {
+          this.vehiculoQueSaldra.horaDeSalida = respuesta.datos;
+          this.listarVehiculosParqueados();
+        })
+      );
   }
 }

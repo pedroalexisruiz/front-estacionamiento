@@ -11,12 +11,9 @@ import { ToastrService } from "ngx-toastr";
   templateUrl: "./vehiculos.component.html",
   styleUrls: ["./vehiculos.component.scss"]
 })
-export class VehiculosComponent implements OnInit, AfterViewInit {
+export class VehiculosComponent implements OnInit {
   @ViewChild("formRegistro", { static: false })
   formularioDeRegistro: RegistrarEntradaComponent;
-
-  vehiculosParqueados: IVehiculo[] = [];
-  vehiculoQueSaldra: IVehiculo | null;
 
   constructor(
     private servicioDeVehiculos: VehiculoService,
@@ -24,40 +21,28 @@ export class VehiculosComponent implements OnInit, AfterViewInit {
     private toast: ToastrService
   ) {}
 
-  ngOnInit() {}
-
-  ngAfterViewInit() {
-    this.cargarVehiculosParqueados();
+  ngOnInit() {
+    this.servicioDeVehiculos.listarVehiculosParqueados();
   }
 
   openDialog(): void {
     const dialogRef = this.dialog.open(ModalSalidaVehiculoComponent, {
       width: "40%",
-      data: this.vehiculoQueSaldra
+      data: this.servicioDeVehiculos.vehiculoQueSaldra
     });
 
     dialogRef.afterClosed().subscribe(vehiculo => {
       if (vehiculo) {
         this.registrarSalida();
       } else {
-        this.vehiculoQueSaldra = null;
+        this.servicioDeVehiculos.vehiculoQueSaldra = null;
       }
     });
-  }
-
-  cargarVehiculosParqueados(): void {
-    this.servicioDeVehiculos
-      .listarVehiculosParqueados()
-      .subscribe(vehiculos => {
-        this.vehiculosParqueados = vehiculos;
-      });
   }
 
   registrarEntrada(vehiculo: IVehiculo): void {
     this.servicioDeVehiculos.registrarEntrada(vehiculo).subscribe(
       respuesta => {
-        vehiculo.horaDeEntrada = respuesta.datos;
-        this.vehiculosParqueados.push(vehiculo);
         this.formularioDeRegistro.limpiarFormulario();
         this.toast.success(
           `se registro la entrada del vehiculo con placa ${
@@ -73,18 +58,19 @@ export class VehiculosComponent implements OnInit, AfterViewInit {
   }
 
   confirmarSalida(placa: string): void {
-    this.vehiculoQueSaldra = this.vehiculosParqueados.find(
-      vehiculo => vehiculo.placa === placa
-    );
-
+    this.servicioDeVehiculos.confirmarSalida(placa);
     this.openDialog();
   }
 
   registrarSalida(): void {
-    this.servicioDeVehiculos.registrarSalida(this.vehiculoQueSaldra.placa).subscribe(
+    this.servicioDeVehiculos.registrarSalida().subscribe(
       respuesta => {
-        this.vehiculoQueSaldra.horaDeSalida = respuesta.datos;
-        this.cargarVehiculosParqueados();
+        this.toast.success(
+          `El vehiculo con placa ${
+            this.servicioDeVehiculos.vehiculoQueSaldra.placa
+          } fue retirado`,
+          "Registro de salida"
+        );
       },
       err => {
         this.toast.error(err, "Error al sacar vehículo:");
