@@ -14,7 +14,7 @@
           <td class="text-center">{{ vehiculo.tipoDeVehiculo | titlecase }}</td>
           <td>{{ vehiculo.horaDeEntrada | date: "medium" }}</td>
           <td
-            id="btnSacarVehiculo-vehiculo.placa"
+            id="btnSacarVehiculo-{{vehiculo.placa}}"
             (click)="solicitarSalidaDeVehiculo(vehiculo.placa)"
             class="text-center"
           >

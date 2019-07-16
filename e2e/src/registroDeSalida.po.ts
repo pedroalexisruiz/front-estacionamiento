@@ -8,7 +8,7 @@ import {
   browser
 } from "protractor";
 
-export class SeccionDeRegistro {
+export class SeccionDeSalida {
   hasta: ProtractorExpectedConditions;
 
   constructor() {
@@ -41,6 +41,14 @@ export class SeccionDeRegistro {
     return $("#btnRegistro");
   }
 
+  getBtnConfirmarSalida(): ElementFinder {
+    return $("#btnConfirmarSalida");
+  }
+
+  getBtnSacarVehiculo(placa: string): ElementFinder {
+    return $("#btnSacarVehiculo-" + placa);
+  }
+
   // Obtener contenido de los elementos del DOM
 
   async getTextoDelToast(): Promise<string> {
@@ -66,6 +74,14 @@ export class SeccionDeRegistro {
     await this.getBtnRegistro().click();
   }
 
+  async clickBtnConfirmarSalida(): Promise<void> {
+    await this.getBtnConfirmarSalida().click();
+  }
+
+  async clickBtnSacarVehiculo(placa: string): Promise<void> {
+    await this.getBtnSacarVehiculo(placa).click();
+  }
+
   async clickSelectTipoDeVehiculo(): Promise<void> {
     await this.getSelectTipoDeVehiculo().click();
   }
@@ -84,6 +100,16 @@ export class SeccionDeRegistro {
     return await this.esperarHastaQueEsteActivo(this.getInputCilindraje());
   }
 
+  async esperarBotonSacarVehiculo(placa: string): Promise<void> {
+    return await this.esperarHastaQueEstePresente(
+      this.getBtnSacarVehiculo(placa)
+    );
+  }
+
+  async esperarBotonConfirmarSalida(): Promise<void> {
+    return await this.esperarHastaQueEstePresente(this.getBtnConfirmarSalida());
+  }
+
   async esperarHastaQueEstePresente(element: ElementFinder): Promise<void> {
     const id = await element.getId();
     return await browser.wait(
@@ -99,6 +125,21 @@ export class SeccionDeRegistro {
       this.hasta.elementToBeClickable(element),
       5000,
       `Elemento ${id} demorando en aparecer en el DOM`
+    );
+  }
+
+  // metodos en espera de accion al no aparecer
+
+  async esperarQueElToastDesaparezca(): Promise<void> {
+    return await this.esperarQueDesaparezca(this.getToastMessage());
+  }
+
+  async esperarQueDesaparezca(element: ElementFinder): Promise<void> {
+    const id = await element.getId();
+    return await browser.wait(
+      this.hasta.stalenessOf(element),
+      6000,
+      `Elemento ${id} demorando en desaparecer en el DOM`
     );
   }
 }
