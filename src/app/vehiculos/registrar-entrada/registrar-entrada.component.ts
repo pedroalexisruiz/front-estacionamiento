@@ -1,4 +1,10 @@
-import { Component, OnInit, Output, ViewChild } from "@angular/core";
+import {
+  Component,
+  OnInit,
+  Output,
+  ViewChild,
+  ElementRef
+} from "@angular/core";
 import { IVehiculo } from "../shared/vehiculo.model";
 import { EventEmitter } from "@angular/core";
 
@@ -14,6 +20,9 @@ export class RegistrarEntradaComponent implements OnInit {
     tipoDeVehiculo: ""
   };
 
+  @ViewChild("placa", { static: false })
+  inputPlaca: ElementRef;
+
   @Output() formularioVehiculoRegistrado = new EventEmitter<IVehiculo>();
 
   constructor() {}
@@ -22,6 +31,10 @@ export class RegistrarEntradaComponent implements OnInit {
 
   registrarEntrada(): void {
     this.formularioVehiculoRegistrado.emit(this.vehiculo);
+  }
+
+  enfocarInputPlaca(): void {
+    (this.inputPlaca.nativeElement as HTMLInputElement).focus();
   }
 
   limpiarFormulario(): void {

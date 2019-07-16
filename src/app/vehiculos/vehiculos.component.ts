@@ -25,6 +25,10 @@ export class VehiculosComponent implements OnInit {
     this.servicioDeVehiculos.listarVehiculosParqueados();
   }
 
+  enfocarFormulario(): void {
+    this.formularioDeRegistro.enfocarInputPlaca();
+  }
+
   openDialog(): void {
     const dialogRef = this.dialog.open(ModalSalidaVehiculoComponent, {
       width: "40%",

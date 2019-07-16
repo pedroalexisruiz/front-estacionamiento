@@ -8,9 +8,11 @@ import { AppRoutingModule } from "./app-routing.module";
 import { AppComponent } from "./app.component";
 
 import { VehiculosModule } from "./vehiculos/vehiculos.module";
+import { BarraMenuComponent } from "./shared/barra-menu/barra-menu.component";
+import { ContenedorParallaxComponent } from "./shared/contenedor-parallax/contenedor-parallax.component";
 
 @NgModule({
-  declarations: [AppComponent],
+  declarations: [AppComponent, BarraMenuComponent, ContenedorParallaxComponent],
   imports: [
     BrowserModule,
     BrowserAnimationsModule,

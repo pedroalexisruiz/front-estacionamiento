@@ -5,6 +5,7 @@
   <form (ngSubmit)="registrarEntrada()">
     <div class="input-field col s12">
       <input
+        #placa
         [(ngModel)]="vehiculo.placa"
         id="placa"
         name="placa"
@@ -37,7 +38,11 @@
       <label for="cilindraje">Cilindraje</label>
     </div>
     <div class="col text-center py-3">
-      <button type="submit" id="btnRegistro" class="waves-effect waves-light btn">
+      <button
+        type="submit"
+        id="btnRegistro"
+        class="waves-effect waves-light btn"
+      >
         Agregar
       </button>
     </div>

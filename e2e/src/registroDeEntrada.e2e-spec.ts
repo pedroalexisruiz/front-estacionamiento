@@ -57,7 +57,7 @@ describe("Estacionamiento registrar ", () => {
 
   it("no deberia dejar registrar porque el vehiculo ya fue ingresado", async () => {
     // Arrange
-    const mensajeEsperado = "El vehículo ya se encuentra en el parqueadero.";
+    const mensajeEsperado = "El vehiculo ya se encuentra en el parqueadero.";
 
     await seccionDeRegistro.setValorPlaca(placa);
     await seccionDeRegistro.clickSelectTipoDeVehiculo();
