@@ -4,6 +4,11 @@ export interface IVehiculo {
   tipoDeVehiculo: string;
   cilindraje?: number;
   totalAPagar?: number;
-  horaDeEntrada?: Date
-  horaDeSalida?: Date
+  horaDeEntrada?: Date;
+  horaDeSalida?: Date;
+}
+
+export interface IResultadoSalida {
+  horaDeSalida: Date;
+  totalAPagar: number;
 }
