@@ -1,0 +1,26 @@
+<div class="d-flex flex-column full-height" >
+  <div class="h-100 carousel carousel-slider center">
+    <div *ngFor="let item of carouselItems, index as i" [ngClass]="item.backgroundColor" class="h-100 carousel-item white-text" id="item-{{i}}">
+      <div class="row h-50">
+        <div
+          class="col pt-5 s10 offset-s1 center-align justify-content-center align-self-center"
+        >
+          <i [ngClass]="item.icon" class="fa-10x white-text"></i>
+        </div>
+      </div>
+      <div class="row pt-4 center-align">
+        <div class="col s12">
+          <h5 class="white-text">{{item.title}}</h5>
+          <h6 class="blue-grey-text text-lighten-4">{{item.description}}</h6>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <a
+  *ngIf="!!currentItem"
+  [ngClass]="currentItem.backgroundColor"
+    class="mt-auto center-align white-text btn btn-block darken-2 btn-large"
+    >Close</a
+  >
+</div>

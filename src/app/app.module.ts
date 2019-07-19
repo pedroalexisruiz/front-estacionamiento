@@ -10,9 +10,15 @@ import { AppComponent } from "./app.component";
 import { VehiculosModule } from "./vehiculos/vehiculos.module";
 import { BarraMenuComponent } from "./shared/barra-menu/barra-menu.component";
 import { ContenedorParallaxComponent } from "./shared/contenedor-parallax/contenedor-parallax.component";
+import { FullHeightCardComponent } from './shared/full-height-card/full-height-card.component';
 
 @NgModule({
-  declarations: [AppComponent, BarraMenuComponent, ContenedorParallaxComponent],
+  declarations: [
+    AppComponent,
+    BarraMenuComponent,
+    ContenedorParallaxComponent,
+    FullHeightCardComponent
+  ],
   imports: [
     BrowserModule,
     BrowserAnimationsModule,
