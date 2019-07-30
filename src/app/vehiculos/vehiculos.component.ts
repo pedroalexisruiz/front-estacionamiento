@@ -6,6 +6,7 @@ import { MatDialog } from "@angular/material/dialog";
 import { ModalSalidaVehiculoComponent } from "./shared/modal-salida-vehiculo/modal-salida-vehiculo.component";
 import { ToastrService } from "ngx-toastr";
 import { ModalCobroComponent } from "./shared/modal-cobro/modal-cobro.component";
+import { PrismicService } from 'app/core/prismic/prismic.service';
 
 @Component({
   selector: "app-vehiculos",
@@ -18,12 +19,14 @@ export class VehiculosComponent implements OnInit {
 
   constructor(
     private servicioDeVehiculos: VehiculoService,
+    private servicioPrismic: PrismicService,
     public dialog: MatDialog,
     private toast: ToastrService
   ) {}
 
   ngOnInit() {
     this.servicioDeVehiculos.listarVehiculosParqueados();
+    this.servicioPrismic.getPreguntas();
   }
 
   enfocarFormulario(): void {
