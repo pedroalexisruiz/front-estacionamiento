@@ -30,7 +30,7 @@ export class PrismicService {
         //     )
         //   ],
         //   {
-        //     fetchLinks: ["respuesta-de-seleccion.preguntas_hijas", "respuesta-de-seleccion.titulo"],
+        //     fetchLinks: ["respuesta-de-seleccion.pregunta_hija", "respuesta-de-seleccion.titulo"],
         //     pageSize: 25,
         //     page: 1,
         //     orderings: "[my.pregunta-seleccion-multiple-respuesta.date desc]"
