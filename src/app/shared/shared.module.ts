@@ -1,14 +1,8 @@
-import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
-import { BarraMenuComponent } from './barra-menu/barra-menu.component';
-import { ContenedorParallaxComponent } from './contenedor-parallax/contenedor-parallax.component';
-
-
+import { NgModule } from "@angular/core";
+import { CommonModule } from "@angular/common";
 
 @NgModule({
-  declarations: [BarraMenuComponent, ContenedorParallaxComponent],
-  imports: [
-    CommonModule
-  ]
+  declarations: [],
+  imports: [CommonModule]
 })
-export class SharedModule { }
+export class SharedModule {}

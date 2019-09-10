@@ -6,11 +6,11 @@ import { VehiculosComponent } from "./vehiculos/vehiculos.component";
   templateUrl: "./app.component.html",
   styleUrls: ["./app.component.scss"]
 })
-export class AppComponent{
+export class AppComponent {
   @ViewChild("componenteVehiculos", { static: false })
   componenteVehiculos: VehiculosComponent;
 
-  enfocarFormulario() {
+  enfocarFormulario($event) {
     this.componenteVehiculos.enfocarFormulario();
   }
 }

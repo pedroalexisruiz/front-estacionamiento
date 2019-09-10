@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild, AfterViewInit } from "@angular/core";
+import { Component, OnInit, ViewChild } from "@angular/core";
 import { IVehiculo } from "./shared/vehiculo.model";
 import { VehiculoService } from "./shared/vehiculo.service";
 import { RegistrarEntradaComponent } from "./registrar-entrada/registrar-entrada.component";
@@ -15,12 +15,15 @@ import { ModalCobroComponent } from "./shared/modal-cobro/modal-cobro.component"
 export class VehiculosComponent implements OnInit {
   @ViewChild("formRegistro", { static: false })
   formularioDeRegistro: RegistrarEntradaComponent;
+  vehiculosParqueados: IVehiculo[];
 
   constructor(
     private servicioDeVehiculos: VehiculoService,
     public dialog: MatDialog,
     private toast: ToastrService
-  ) {}
+  ) {
+    this.vehiculosParqueados = this.servicioDeVehiculos.vehiculosParqueados;
+  }
 
   ngOnInit() {
     this.servicioDeVehiculos.listarVehiculosParqueados();
